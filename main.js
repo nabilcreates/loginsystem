@@ -15,9 +15,9 @@ login_button.on('click', () => {
 
     // IF WRONG USERNAME OR PASSWORD, IT WILL RETURN UNDEFINED
     if (checkCredentials(username.val(), password.val()) !== undefined) {
-        console.log("LOGGED IN")
+        $("#message").text('LOGGED IN')
     } else {
-        console.log("WRONG USERNAME OR PASSWORD")
+        $("#message").text('WRONG USERNAME OR PASSWORD')
     }
 
 })
@@ -62,4 +62,6 @@ function register(username, password) {
 
     // set the item as the tempusers (which is all the users)
     localStorage.setItem('users', JSON.stringify(tempusers))
+
+    $("#message").text('Registered User')
 }
