@@ -17,22 +17,40 @@ let users = [{
     {
         user: 'renabil',
         pass: 'gayass',
+    },
+
+    {
+        user: 'fun',
+        pass: 'ass',
     }
 ]
-
 login_button.on('click', () => {
-    // LOOP THROUGH THE ARRAY
-    for (let x = 0; x < users.length; x++) {
 
-        // CHECK IF THE USERNAME AND PASSWORD MATCHES ANY OF THE USERS
-        if (username.val() == users[x].user && password.val() == users[x].pass) {
-            console.log("LOGGED IN")
+    // IF WRONG USERNAME OR PASSWORD, IT WILL RETURN UNDEFINED
+    if (checkCredentials(username.val(), password.val()) !== undefined){
+        console.log("LOGGED IN")
+    }else{
+        console.log("WRONG USERNAME OR PASSWORD")
+    }
 
+})
+
+function checkCredentials(username, password) {
+    // console.log(username)
+    // console.log(password)
+
+    for (var i = 0; i < users.length; i++) {
+        // console.log(users[i])
+
+        // IF WRONG USERNAME OR PASSWORD, IT WILL RETURN UNDEFINED
+        if (username == users[i].user && password == users[i].pass) {
+            return true;
         } else {
-            console.log('WRONG USERNAME OR PASSWORD')
+            continue;
         }
     }
-})
+
+}
 
 function register(username, password) {
     users.push({
