@@ -8,31 +8,32 @@ let register_button = $("#register_button");
 let register_username = $("#register_username");
 let register_password = $("#register_password");
 
-// LIST OF DEFAULT USERS
-let users = [{
-        user: 'cooler',
-        pass: 'suckingonthisdick',
-    },
-
+let tempUsers = [
     {
-        user: 'renabil',
-        pass: 'gayass',
-    },
-
-    {
-        user: 'fun',
-        pass: 'ass',
+        user: 'admin',
+        pass: 'admin',
     }
 ]
+
+localStorage.setItem('users', JSON.stringify(tempUsers))
+
+let users = JSON.parse(localStorage.getItem('users'))
+
+// EVENTS!!!
 login_button.on('click', () => {
 
     // IF WRONG USERNAME OR PASSWORD, IT WILL RETURN UNDEFINED
-    if (checkCredentials(username.val(), password.val()) !== undefined){
+    if (checkCredentials(username.val(), password.val()) !== undefined) {
         console.log("LOGGED IN")
-    }else{
+    } else {
         console.log("WRONG USERNAME OR PASSWORD")
     }
 
+})
+
+register_button.on('click', () => {
+    register(register_username.val(), register_password.val())
+    console.log(users)
 })
 
 function checkCredentials(username, password) {
