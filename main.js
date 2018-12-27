@@ -8,16 +8,7 @@ let register_button = $("#register_button");
 let register_username = $("#register_username");
 let register_password = $("#register_password");
 
-let tempUsers = [
-    {
-        user: 'admin',
-        pass: 'admin',
-    }
-]
-
-localStorage.setItem('users', JSON.stringify(tempUsers))
-
-let users = JSON.parse(localStorage.getItem('users'))
+let users = []
 
 // EVENTS!!!
 login_button.on('click', () => {
@@ -33,18 +24,23 @@ login_button.on('click', () => {
 
 register_button.on('click', () => {
     register(register_username.val(), register_password.val())
-    console.log(users)
 })
 
 function checkCredentials(username, password) {
+    
+    // USERDB = THE USERNAME AND PASSWORDS IN LOCALSTORAGE
+    let userDB = JSON.parse(localStorage.getItem('users'))
+    
     // console.log(username)
     // console.log(password)
 
-    for (var i = 0; i < users.length; i++) {
+    // LOOP
+    for (var i = 0; i < userDB.length; i++) {
         // console.log(users[i])
 
+        // CHECK THE INPUT TO EVERY OF THE USERDB AND SEE IF THE USER EXIST
         // IF WRONG USERNAME OR PASSWORD, IT WILL RETURN UNDEFINED
-        if (username == users[i].user && password == users[i].pass) {
+        if (username == userDB[i].user && password == userDB[i].pass) {
             return true;
         } else {
             continue;
@@ -54,8 +50,16 @@ function checkCredentials(username, password) {
 }
 
 function register(username, password) {
-    users.push({
+
+    // tempusers is the current array of users
+    let tempusers = users;
+    
+    // push to the tempusers
+    tempusers.push({
         user: username,
         pass: password,
     })
+
+    // set the item as the tempusers (which is all the users)
+    localStorage.setItem('users', JSON.stringify(tempusers))
 }
